@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/index.js"
+    "start": "babel-node src/index.js",
+    "babel-node": "babel-node --presets=env",
+    "dev": "nodemon --exec npm run babel-node ./src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +15,8 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
