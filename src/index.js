@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import path from 'path';
+import router from "./routes/producto.routes";
 
 //creo una instancia de express
 const app = express();
@@ -29,11 +30,9 @@ app.use(express.urlencoded({extended:true}));
 //para mostrar esa ruta de manera estatica lo hago con express.static
 app.use(express.static(path.join(__dirname,'../public')));
 
-//crear rutas
-app.get('/',(req,res)=>{
-    res.send('hola desde el servidor backend')
-})
 
-app.delete('/borrardatos',(req,res)=>{
-    res.send('aqui vamos a borrar')
-})
+
+
+//crear rutas
+//cuando alguien haga una peticion a la ruta carga las rutas definidas en router
+app.use('/',router)
