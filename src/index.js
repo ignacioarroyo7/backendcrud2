@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import path from 'path';
 
 //creo una instancia de express
 const app = express();
@@ -19,6 +20,14 @@ app.use(cors());//permite recibir peticiones remotas
 //para recibir objetos en formato json
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+
+//mostrar una pagina por defecto
+//debo decirle al backend donde esta el archivo html y que levante ese archivo como un archivo estatico
+//le pedimos ayuda a node con path y su funcion join
+///__dirname me indica donde estoy actualmente y le concateno para llevarme a public
+//para mostrar esa ruta de manera estatica lo hago con express.static
+app.use(express.static(path.join(__dirname,'../public')));
 
 //crear rutas
 app.get('/',(req,res)=>{
