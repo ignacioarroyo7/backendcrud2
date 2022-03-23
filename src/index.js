@@ -35,4 +35,4 @@ app.use(express.static(path.join(__dirname,'../public')));
 
 //crear rutas
 //cuando alguien haga una peticion a la ruta carga las rutas definidas en router
-app.use('/',router)
+app.use('/apicrud/',router)

@@ -9,5 +9,8 @@ productoCtrl.getListaProductos = (req,res)=>{
 productoCtrl.borrarProducto = (req,res)=>{
     res.send('aqui borro productos')
 }
+productoCtrl.crearProducto = (req,res)=>{
+    res.send('creando producto')
+}
 
 export default productoCtrl;
