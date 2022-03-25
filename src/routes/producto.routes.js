@@ -7,9 +7,11 @@ const router = Router();
 router
   .route("/")
   .get(productoCtrl.getListaProductos)
-  .delete(productoCtrl.borrarProducto)
   .post(productoCtrl.crearProducto);
 
-  router.route("/:id").get(productoCtrl.getProducto);
+router
+  .route("/:id")
+  .get(productoCtrl.getProducto)
+  .delete(productoCtrl.borrarProducto);
 
 export default router;

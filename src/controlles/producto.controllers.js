@@ -2,6 +2,32 @@ import Producto from "../models/producto";
 
 const productoCtrl = {};
 
+productoCtrl.crearProducto = async (req,res)=>{
+    //console.log(req.body);
+    try {
+        //validar por las dudas, usando helpers o if
+        //crear un nuevo objeto para guardar en la bd
+        const productoNuevo = new Producto({
+            nombreProducto:req.body.nombreProducto,
+            precioProducto:req.body.precioProducto,
+            categoriaProducto:req.body.categoriaProducto
+        });
+        //guardar producto en la bd
+        await productoNuevo.save();
+        //enviar respuesta
+        res.status(201).json({
+            mensaje: 'Producto agregado correctamente'
+        })
+        
+    } catch (error) {
+        console.log(error);
+        //enviar codigo de error
+        res.status(400).json({
+            mensaje:'Error al agregar un producto'
+        })
+    }
+}
+
 //logica para obtener la lista de productos
 //creo una propiedad getListaProductos que ejecuta un metodo
 productoCtrl.getListaProductos = async (req,res)=>{
@@ -30,33 +56,20 @@ productoCtrl.getProducto = async (req,res)=>{
     }
 }
 
-productoCtrl.borrarProducto = (req,res)=>{
-    res.send('aqui borro productos')
-}
-productoCtrl.crearProducto = async (req,res)=>{
-    //console.log(req.body);
+productoCtrl.borrarProducto = async (req,res)=>{
     try {
-        //validar por las dudas, usando helpers o if
-        //crear un nuevo objeto para guardar en la bd
-        const productoNuevo = new Producto({
-            nombreProducto:req.body.nombreProducto,
-            precioProducto:req.body.precioProducto,
-            categoriaProducto:req.body.categoriaProducto
-        });
-        //guardar producto en la bd
-        await productoNuevo.save();
-        //enviar respuesta
-        res.status(201).json({
-            mensaje: 'Producto agregado correctamente'
+        //buscar un producto por el id y eliminarlo
+        await Producto.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            mensaje: 'Producto borrado correctamente'
         })
-        
     } catch (error) {
-        console.log(error);
-        //enviar codigo de error
+        console.log(error)
         res.status(400).json({
-            mensaje:'Error al agregar un producto'
+            mensaje:'Error al eliminar un producto'
         })
     }
 }
+
 
 export default productoCtrl;
