@@ -4,8 +4,16 @@ const productoCtrl = {};
 
 //logica para obtener la lista de productos
 //creo una propiedad getListaProductos que ejecuta un metodo
-productoCtrl.getListaProductos = (req,res)=>{
-    res.send('listar productos');
+productoCtrl.getListaProductos = async (req,res)=>{
+    try {
+        //crear arreglo con todos los productos
+        const listaProductos = await Producto.find();
+        res.status(200).json(listaProductos);
+    } catch (error) {
+        res.status(404).json({
+            mensaje:'Hubo un error al obtener el listado de productos'
+        })
+    }
 }
 
 productoCtrl.borrarProducto = (req,res)=>{
