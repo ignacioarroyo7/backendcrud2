@@ -15,6 +15,20 @@ productoCtrl.getListaProductos = async (req,res)=>{
         })
     }
 }
+productoCtrl.getProducto = async (req,res)=>{
+    try {
+        //obtener parametro de la ruta
+        console.log(req.params.id);
+        //creo el objeto y lo busco en la bd
+        const productoBuscado = await Producto.findById(req.params.id);
+        res.status(200).json(productoBuscado)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({
+            mensaje:'Hubo un error al obtener el listado de productos'
+        })
+    }
+}
 
 productoCtrl.borrarProducto = (req,res)=>{
     res.send('aqui borro productos')
