@@ -70,6 +70,20 @@ productoCtrl.borrarProducto = async (req,res)=>{
         })
     }
 }
+productoCtrl.editarProducto = async (req,res)=>{
+    try {
+        //buscar el producto con el id y modificar los valores con los datos que llegan en el body
+        await Producto.findByIdAndUpdate(req.params.id,req.body)
+        res.status(200).json({
+            mensaje:'Se modifico el producto correctamente'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({
+            mensaje:'No se encontro el producto'
+        })
+    }
+}
 
 
 export default productoCtrl;

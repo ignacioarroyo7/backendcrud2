@@ -12,6 +12,7 @@ router
 router
   .route("/:id")
   .get(productoCtrl.getProducto)
-  .delete(productoCtrl.borrarProducto);
+  .delete(productoCtrl.borrarProducto)
+  .put(productoCtrl.editarProducto);
 
 export default router;
